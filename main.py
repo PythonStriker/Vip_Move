@@ -13,9 +13,7 @@ url = 'http://www.qmaile.com/'
 
 def read():
     if os.path.exists('data.txt'):
-        print(os.path.exists('data.txt'))
-        with open('data.txt', encoding='utf-8', mode='a') as file:
-            print(os.path.getsize('data.txt'))
+        with open('data.txt', encoding='utf-8', mode='r') as file:
             if os.path.getsize('data.txt')==0:
                 readlist = ['', '']
             else:
