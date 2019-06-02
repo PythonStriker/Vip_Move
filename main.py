@@ -11,11 +11,16 @@ data = ["播放接口1","播放接口2",\
 url = 'http://www.qmaile.com/'
 
 def read():
+    file = open('data.txt',encoding='utf-8',mode='a')
+    file.close()
     with open('data.txt', encoding='utf-8', mode='r+') as file:
         lines = file.readlines()
-        #first_line = lines[0]
-        last_line = lines[-1]
-        readlist = last_line.split(' ')
+        if len(lines) != 0:
+            #first_line = lines[0]
+            last_line = lines[-1]
+            readlist = last_line.split(' ')
+        else:
+            readlist = ['','']
         return readlist
 responed = requests.get(url)
 reg = re.compile('<option value="(.*?)" selected="">')
