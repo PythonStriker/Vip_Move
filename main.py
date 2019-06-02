@@ -3,6 +3,7 @@ import webbrowser
 import re
 import tkinter as tk
 from tkinter import ttk
+import os
 
 data = ["播放接口1","播放接口2",\
         "播放接口3","播放接口4",\
@@ -11,17 +12,22 @@ data = ["播放接口1","播放接口2",\
 url = 'http://www.qmaile.com/'
 
 def read():
-    file = open('data.txt',encoding='utf-8',mode='a')
-    file.close()
-    with open('data.txt', encoding='utf-8', mode='r+') as file:
-        lines = file.readlines()
-        if len(lines) != 0:
-            #first_line = lines[0]
-            last_line = lines[-1]
-            readlist = last_line.split(' ')
-        else:
-            readlist = ['','']
-        return readlist
+    if os.path.exists('data.txt'):
+        print(os.path.exists('data.txt'))
+        with open('data.txt', encoding='utf-8', mode='a') as file:
+            print(os.path.getsize('data.txt'))
+            if os.path.getsize('data.txt')==0:
+                readlist = ['', '']
+            else:
+                lines = file.readlines()
+                last_line = lines[-1]
+                readlist = last_line.split(' ')
+    else:
+        file = open('data.txt',encoding='utf-8',mode='a')
+        file.close()
+        readlist = ['', '']
+    return readlist
+
 responed = requests.get(url)
 reg = re.compile('<option value="(.*?)" selected="">')
 res = re.findall(reg,responed.text)
