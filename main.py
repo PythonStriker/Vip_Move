@@ -1,3 +1,5 @@
+__author__ = 'PythonStriker'
+
 import requests
 import webbrowser
 import re
